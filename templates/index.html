@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>FWI Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>FWI Prediction Form</h2>
+        <form action="/predictdata" method="post">
+            <input type="text" name="Temperature" placeholder="Temperature" required>
+            <input type="text" name="RH" placeholder="Relative Humidity (RH)" required>
+            <input type="text" name="Ws" placeholder="Wind Speed (Ws)" required>
+            <input type="text" name="Rain" placeholder="Rain" required>
+            <input type="text" name="FFMC" placeholder="FFMC Index" required>
+            <input type="text" name="DMC" placeholder="DMC Index" required>
+            <input type="text" name="DC" placeholder="DC Index" required>
+            <input type="text" name="BUI" placeholder="BUI Index" required>
+            <input type="text" name="ISI" placeholder="ISI Index" required>
+            <input type="text" name="Classes" placeholder="Classes (0 or 1)" required>
+            <input type="text" name="Region" placeholder="Region (0 or 1)" required>
+
+            <button type="submit">Predict FWI</button>
+        </form>
+
+        {% if result %}
+        <h3 style="text-align: center; color: #d9534f;">The FWI Prediction is: {{ result }}</h3>
+        {% endif %}
+    </div>
+</body>
+
+</html>
