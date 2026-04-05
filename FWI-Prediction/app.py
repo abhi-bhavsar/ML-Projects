@@ -5,8 +5,7 @@ import numpy as np
 
 app = Flask(__name__)
 application = app
-base_dir = os.path.dirname(__file__)
-
+base_dir = os.path.dirname(os.path.abspath(__file__))
 ridge_model = pickle.load(open(os.path.join(base_dir, 'Models/ridge.pkl'), 'rb'))
 standard_scaler = pickle.load(open(os.path.join(base_dir, 'Models/scaler.pkl'), 'rb'))
 
