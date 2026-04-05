@@ -5,6 +5,7 @@ import numpy as np
 
 app = Flask(__name__)
 application = app
+
 base_dir = os.path.dirname(os.path.abspath(__file__))
 ridge_model = pickle.load(open(os.path.join(base_dir, 'Models/ridge.pkl'), 'rb'))
 standard_scaler = pickle.load(open(os.path.join(base_dir, 'Models/scaler.pkl'), 'rb'))
@@ -28,14 +29,14 @@ def predict_datapoint():
         Classes = float(request.form.get('Classes'))
         Region = float(request.form.get('Region'))
 
-        new_data = np.array([[Temperature, RH, Ws, Rain, FFMC, DMC,DC,BUI, ISI, Classes, Region]])
+        new_data = np.array([[Temperature, RH, Ws, Rain, FFMC, DMC, DC, BUI, ISI, Classes, Region]])
         new_data_scaled = standard_scaler.transform(new_data)
         result = ridge_model.predict(new_data_scaled)
 
         return render_template('index.html', result=result[0])
 
     except Exception as e:
-        return f"Error: {str(e)}"
+        return f"Error: {str(e)}", 500
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=False) 
